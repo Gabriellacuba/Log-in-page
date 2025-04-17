@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #5D4B8C;
+  --primary-dark: #4D3B7C;
+  --primary-light: #9B8DC9;
+  --white: #FFFFFF;
+  --light-gray: #F5F7FA;
+  --dark-gray: #333333;
+  --error-red: #F56565;
+}
+
+@layer base {
+  body {
+    @apply antialiased;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+  }
+}
+
+.font-cursive {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+/* Animation classes */
+.slide-in {
+  animation: slideIn 0.6s ease forwards;
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Form styles */
+@layer components {
+  .form-input {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg;
+    @apply focus:ring-2 focus:ring-primary focus:border-transparent;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    @apply w-full py-3 rounded-full text-white font-medium;
+    @apply bg-primary hover:bg-primary-dark;
+    @apply transition-all duration-200;
+  }
+
+  .btn-primary:hover {
+    @apply transform scale-105;
+  }
+
+  .btn-primary:active {
+    @apply transform scale-95;
+  }
+} 
