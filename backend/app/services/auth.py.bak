@@ -112,14 +112,9 @@ class AuthService:
             
             auth = auth_result.data[0]
             print("Found authentication record")
-            print(f"Debug - Authentication record: {auth}")
-            print(f"Debug - Attempting to verify password: '{credentials.password}'")
             
             # Verify the password
-            password_verified = verify_password(credentials.password, auth['password_hash'])
-            print(f"Debug - Password verification result: {password_verified}")
-            
-            if not password_verified:
+            if not verify_password(credentials.password, auth['password_hash']):
                 raise HTTPException(status_code=401, detail="Invalid email or password")
             
             # Update last login time
@@ -130,7 +125,7 @@ class AuthService:
             
             # Create a session
             session_data = {
-                "session_id": create_access_token({"sub": str(client['id'])}),
+                "ssesion_id": create_access_token({"sub": str(client['id'])}),
                 "client_id": client['id'],
                 "created_at": current_time.isoformat(),
                 "expires_at": (current_time + timedelta(days=1)).isoformat()
@@ -140,7 +135,7 @@ class AuthService:
             print(f"Session created: {session_result.data}")
             
             return Token(
-                access_token=session_data["session_id"],
+                access_token=session_data["ssesion_id"],
                 token_type="bearer"
             )
             
@@ -148,8 +143,6 @@ class AuthService:
             raise
         except Exception as e:
             print(f"Login error: {str(e)}")
-            print(f"Debug - Error type: {type(e)}")
-            print(f"Debug - Error args: {e.args}")
             raise HTTPException(status_code=401, detail="Invalid email or password")
 
     @staticmethod

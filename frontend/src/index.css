@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --primary: #5D4B8C;
-  --primary-dark: #4D3B7C;
-  --primary-light: #9B8DC9;
+  --primary: #4B2D83;
+  --primary-dark: #3B1E73;
+  --primary-light: #6B4DA3;
+  --secondary: #2FB6E5;
   --white: #FFFFFF;
   --light-gray: #F5F7FA;
   --dark-gray: #333333;
@@ -15,18 +16,40 @@
 @layer base {
   body {
     @apply antialiased;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
   }
 }
 
 .font-cursive {
   font-family: 'Playfair Display', serif;
   font-weight: 700;
+}
+
+/* Grid layout for 50:50 split */
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Carousel background image styles */
+.bg-center {
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+
+@media (max-width: 768px) {
+  .grid-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
 }
 
 /* Animation classes */
@@ -36,6 +59,14 @@
 
 .fade-in {
   animation: fadeIn 0.8s ease forwards;
+}
+
+.book-open-enter {
+  animation: bookOpenEnter 0.6s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+.book-open-exit {
+  animation: bookOpenExit 0.6s cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
 
 @keyframes slideIn {
@@ -58,25 +89,74 @@
   }
 }
 
+@keyframes bookOpenEnter {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bookOpenExit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+/* Ken Burns effect for carousel */
+.ken-burns {
+  animation: kenBurns 20s ease alternate infinite;
+}
+
+@keyframes kenBurns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
 /* Form styles */
 @layer components {
   .form-input {
     @apply w-full px-4 py-3 border border-gray-300 rounded-lg;
     @apply focus:ring-2 focus:ring-primary focus:border-transparent;
+    @apply text-base;
     transition: all 0.3s ease;
+    height: 48px;
   }
 
   .btn-primary {
-    @apply w-full py-3 rounded-full text-white font-medium;
+    @apply w-full py-3 rounded-lg text-white font-medium;
     @apply bg-primary hover:bg-primary-dark;
     @apply transition-all duration-200;
+    @apply text-base;
+    height: 48px;
   }
 
   .btn-primary:hover {
-    @apply transform scale-105;
+    @apply transform hover:scale-[1.02];
   }
 
   .btn-primary:active {
-    @apply transform scale-95;
+    @apply transform scale-[0.98];
+  }
+  
+  .carousel-indicator {
+    @apply w-2 h-2 rounded-full bg-white bg-opacity-50 mx-1 cursor-pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .carousel-indicator.active {
+    @apply bg-white bg-opacity-100 w-4;
   }
 } 
