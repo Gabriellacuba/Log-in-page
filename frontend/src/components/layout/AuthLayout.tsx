@@ -44,7 +44,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % carouselImages.length);
-    }, 7000);
+    }, 8000); // Extended time between transitions
     
     return () => clearInterval(interval);
   }, []);
@@ -59,9 +59,9 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
       </div>
       
       {/* Right side - Carousel images */}
-      <div className="relative overflow-hidden hidden md:block bg-gray-100">
+      <div className="relative overflow-hidden hidden md:block bg-primary-dark">
         {imageError && (
-          <div className="absolute inset-0 flex items-center justify-center text-gray-500 text-center p-4">
+          <div className="absolute inset-0 flex items-center justify-center text-gray-200 text-center p-4 z-10">
             <div>
               <p>Images could not be loaded.</p>
               <p className="text-sm mt-2">Check browser console for details.</p>
@@ -82,7 +82,10 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
+            transition={{ 
+              duration: 0.9, 
+              ease: "easeInOut" 
+            }}
           />
         </AnimatePresence>
         

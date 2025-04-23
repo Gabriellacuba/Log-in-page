@@ -95,30 +95,29 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Logo and Brand */}
-      <div className="flex items-center mb-10">
+      {/* Logo - bigger and centered */}
+      <div className="flex justify-center mb-14">
         <img 
           src="/images/Company logo.svg" 
-          alt="Kingstons" 
-          className="h-12 w-auto"
+          alt="Company Logo" 
+          className="h-28 w-auto"
           onError={(e) => {
             e.currentTarget.style.display = 'none';
             const parent = e.currentTarget.parentElement;
             if (parent) {
               // Fallback to text if image fails to load
               const fallbackEl = document.createElement('div');
-              fallbackEl.innerHTML = '<div class="h-12 w-12 bg-primary rounded-lg flex items-center justify-center"><span class="text-white text-xl font-bold">K</span></div>';
+              fallbackEl.innerHTML = '<div class="h-28 w-28 bg-primary rounded-lg flex items-center justify-center"><span class="text-white text-3xl font-bold">K</span></div>';
               parent.appendChild(fallbackEl.firstChild as Node);
             }
           }}
         />
-        <h1 className="text-2xl font-semibold ml-3 text-primary">Kingstons</h1>
       </div>
       
       {/* Form */}
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold mb-2 text-dark-gray">Sign In</h2>
-        <p className="text-gray-500">Enter your credentials to access your account</p>
+      <div className="mb-6">
+        <h2 className="text-2xl font-semibold mb-1 text-dark-gray">Sign In</h2>
+        <p className="text-sm text-gray-500">Enter your credentials to access your account</p>
       </div>
       
       {error && (
@@ -156,7 +155,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         <div>
           <div className="flex justify-between items-center mb-1">
             <label className="block text-sm font-medium text-gray-700">Password</label>
-            <a href="#" className="text-sm text-primary hover:text-primary-light">Forgot your password?</a>
+            <Link to="/forgot-password" className="text-sm text-primary hover:text-primary-light">Forgot your password?</Link>
           </div>
           <div className="relative">
             <input

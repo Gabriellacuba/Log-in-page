@@ -15,6 +15,10 @@ class Settings(BaseSettings):
     JWT_SECRET: str = os.getenv("JWT_SECRET")
     JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
+    
+    # Password reset settings
+    PASSWORD_RESET_TOKEN_EXPIRE_MINUTES: int = 30  # 30 minutes
+    FRONTEND_URL: str = os.getenv("FRONTEND_URL", "http://localhost:3000")  # Default to local development
 
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -26,4 +30,5 @@ settings = Settings()
 print("\n=== Settings Initialized ===")
 print(f"Settings SUPABASE_URL: {settings.SUPABASE_URL}")
 print(f"Settings SUPABASE_KEY length: {len(settings.SUPABASE_KEY)}")
-print(f"Settings JWT_SECRET length: {len(settings.JWT_SECRET)}") 
+print(f"Settings JWT_SECRET length: {len(settings.JWT_SECRET)}")
+print(f"Settings FRONTEND_URL: {settings.FRONTEND_URL}") 

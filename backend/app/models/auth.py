@@ -14,4 +14,15 @@ class LogoutRequest(BaseModel):
 
 class SessionCreate(BaseModel):
     client_id: int
-    expires_at: datetime 
+    expires_at: datetime
+
+# New models for forgot password functionality
+class PasswordResetRequest(BaseModel):
+    email: str
+
+class PasswordResetTokenVerify(BaseModel):
+    token: str
+
+class PasswordReset(BaseModel):
+    token: str
+    new_password: str 
